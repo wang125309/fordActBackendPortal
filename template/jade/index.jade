@@ -1,0 +1,103 @@
+include ./lib/header.jade
+    link(href="/static/css/index.css",rel="stylesheet",type="text/css")
+    script(language="javascript",src="/static/js/index.min.js")
+    script.
+        !(function() {
+            var rem;
+            rem = function() {
+                document.documentElement.style.fontSize = (document.documentElement.clientWidth || document.documentElement.clientWidth) + 'px';
+            };
+            rem();
+            window.addEventListener('resize', rem, false);
+            var _hmt = _hmt || []
+        })();
+    body(ng-app="app",ng-controller="indexCtrl",init,ng-cloak)
+        div.share=""
+        div.copy(ng-show="copy==true",ng-click="closeCopy()") 长按复制
+        section(class="page page1")
+            div.background
+                div.nav=""
+                div.bottom
+                    div.finger=""
+                    div.text=""
+        section(class="page page2 {{ blur }}")
+            div.background
+                div.nav=""
+                div.upside
+                    div.btn-line
+                        div.left
+                            div.news-btn.button(ng-click="goNews()") 新闻资料
+                        div.right
+                            div.product-btn.button(ng-click="goProduct()") 产品
+                    div.btn-line
+                        div.left
+                            div.cul-btn.button(ng-click="goCul()") 品牌文化
+                        div.right
+                            div.desc-btn.button(ng-click="goCom()") 企业及高管
+                    div.btn-line
+                        div.left
+                            div.pos-btn.button(ng-click="goPos()") 位置信息
+                        div.right
+                            div.img-btn.button(ng-click="goImg()") 图片资料
+                div.bottom=""
+        div.details(ng-show="detailsShow==true",class="{{ detailsShow }}")
+            div.main
+                div.close(ng-click="close()")=""
+                div.info
+                    div.product-list-view(ng-show="productShow==true")
+                        div.title(ng-click="goProductAnnc()")
+                            div.text 长安福特车型介绍
+                            div.border=""
+                        div.title(ng-click="goProductSettings()")
+                            div.text 长安福特车型配置表
+                            div.border=""
+                    div.product-list-view(ng-show="productListShow==true")
+                        div.title(ng-repeat="i in products",ng-click="goProductDetail(i.id)")
+                            div.text(ng-bind="i.title")=""
+                            div.border=""
+                    div.product-list-view(ng-show="comShow==true")
+                        div.title(ng-click="goLeader()")
+                            div.text 高层介绍及图片
+                            div.border=""
+                        div.title(ng-click="goComDesc()")
+                            div.text 企业介绍
+                            div.border=""
+                    div.product-list-view.com(ng-show="comListShow==true")
+                        div.title(ng-click="goComDesc(1)")
+                            div.text 长安福特汽车有限公司
+                            div.border=""
+                        div.title(ng-click="goComDesc(2)")
+                            div.text 长安福特汽车有限公司大事记 
+                            div.border=""
+                    div.product-list-view.leader(ng-show="leaderListShow==true")
+                        div.title(ng-click="goLeaderDetail(1)")
+                            div.text 马瑞麟-长安福特汽车有限公司总裁
+                            div.border=""
+                        div.title(ng-click="goLeaderDetail(2)")
+                            div.text 何朝兵-长安福特汽车有限公司执行副总裁
+                            div.border=""
+                        div.title(ng-click="goLeaderDetail(3)")
+                            div.text 刘淳玮-长安福特销售公司总经理
+                            div.border=""
+                        div.title(ng-click="goLeaderDetail(4)")
+                            div.text 陈旭-长安福特销售公司常务副总经理 
+                            div.border=""
+                    div.ele-info(ng-show="eleShow==true")
+                        div.title(ng-show="productShow==true")
+                            div.text(ng-bind="eleTitle")
+                            div.border=""
+                            div.border-down=""
+                        div.title.leader(ng-show="productShow!=true")
+                            div.text(ng-bind="eleTitle")
+                            div.border=""
+                            div.border-down=""
+                        div.ele-desc
+                            img(ng-show="leaderImgShow==true",ng-src="{{ leaderImg }}",style="width:30%")
+                            div.desc(ng-bind-html="eleDesc")
+            div.tools
+                div.tool-bar
+                    div.back-tool(ng-click="back()",ng-show="backShow==true")=""
+                    div.copy-tool(ng-click="goCopy()",ng-show="copyShow==true")=""
+                    div.up-tool(ng-click="up()",ng-show="upShow==true")=""
+
+    script(language="javascript",src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js")
